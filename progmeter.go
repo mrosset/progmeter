@@ -124,7 +124,7 @@ func (it *Item) Print(state string) {
 	fmt.Printf("\r[%s] %s %s", state, it.infoRender, it.Name)
 }
 
-func (p *ProgMeter) SetState(key, state string) {
+func (p *ProgMeter) SetState(key, state, progress string) {
 	if p == nil {
 		return
 	}
@@ -137,7 +137,7 @@ func (p *ProgMeter) SetState(key, state string) {
 				it.Print(state)
 			} else {
 				fmt.Printf(up, i)
-				fmt.Printf("\r[%s]", state)
+				fmt.Printf("\r[%s]%s", state, progress)
 				fmt.Printf(down+"\r", i)
 			}
 			break
@@ -208,11 +208,11 @@ func (p *ProgMeter) Error(key, err string) {
 	}
 }
 
-func (p *ProgMeter) Working(key, state string) {
+func (p *ProgMeter) Working(key, state, progress string) {
 	if p == nil {
 		return
 	}
-	p.SetState(key, p.color(magenta, state))
+	p.SetState(key, p.color(magenta, state), progress)
 }
 
 func (p *ProgMeter) MarkDone() {
